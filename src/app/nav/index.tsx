@@ -7,7 +7,6 @@ import {
   Menu,
   MenuButton,
   Flex,
-    Box
 } from '@chakra-ui/react'
 import SearchInput from './SearchInput'
 import RightContent from './RightContent'
@@ -40,9 +39,9 @@ const Navbar = () => {
                         }}
                     />
                     {user && (
-                        <Center mr={2}>
+                        <Center mx='12px' display={{base: 'none', sm: 'flex'}}>
                             <Menu>
-                                <MenuButton mr={2} ml={{base:0, lg: 2}}>
+                                <MenuButton ml={{base:0, lg: 2}}>
                                     <Flex align="center" justify="space-between" width={{base: 'auto', lg: '150px'}}>
                                         <HStack>
                                             <Icon as={AiFillHome} fontSize={20} />
@@ -56,8 +55,6 @@ const Navbar = () => {
                     )}
                 </HStack>
                 <SearchInput user={user} />
-
-
                 <RightContent user={user} />
                 {/* <AuthButtons /> */}
             </HStack>
