@@ -20,7 +20,7 @@ const RightContent = ({ user }: Props) => {
             <AuthModal />
             <HStack>{user ? <Icons /> : <AuthButtons />}
             {user ?
-                <UserMenu />
+                <UserMenu user={user} />
             : (
                   <Center>
                       <Menu>

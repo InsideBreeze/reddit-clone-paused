@@ -1,22 +1,25 @@
 import { authModalAtom } from '@/atoms/authModalAtom'
 import { auth } from '@/firebase'
 import { Button, Input, VStack, Text } from '@chakra-ui/react'
+import { updateProfile } from 'firebase/auth'
 import { useSetAtom } from 'jotai'
 import { useState } from 'react'
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth'
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth'
 const SignUp = () => {
   const setAuthModalState = useSetAtom(authModalAtom)
   const [fieldValues, setFieldValues] = useState({
-    email: '',
-    password: '',
-    passwordConfirm: ''
+      email: '',
+      password: '',
+      passwordConfirm: ''
   })
-  const [error, setError] = useState('')
+    const [error, setError] = useState('')
 
-  const [createUserWithEmailAndPassword, user, loading, signUpError] =
-    useCreateUserWithEmailAndPassword(auth)
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFieldValues({
+    const [createUserWithEmailAndPassword, user, loading, signUpError] =
+        useCreateUserWithEmailAndPassword(auth)
+
+    const [updateProfile] = useUpdateProfile(auth);
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFieldValues({
       ...fieldValues,
       [e.target.name]: e.target.value
     })
@@ -24,6 +27,7 @@ const SignUp = () => {
 
   const onSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setError('')
     if (fieldValues.password !== fieldValues.passwordConfirm) {
       setError('password and passwordConfirm are not matched')
       return
@@ -34,6 +38,9 @@ const SignUp = () => {
       fieldValues.password
     )
     if (user) {
+      await updateProfile({
+        displayName: fieldValues.email.split('@')[0]
+      })
       setAuthModalState(prev => ({ ...prev, open: false }))
     }
   }
@@ -92,6 +99,7 @@ const SignUp = () => {
         <Text color="red" fontSize="10pt">
           {/* TODO: signInError                     */}
           {error}
+          {signUpError && signUpError.message}
         </Text>
         <Text>
           Already redditor?

@@ -34,6 +34,7 @@ const AuthModal = () => {
           <ModalHeader textAlign="center">
             {authModalState.view === 'login' && 'Login'}
             {authModalState.view === 'signUp' && 'Sign up'}
+            {authModalState.view === 'resetPassword' && 'Reset Password'}
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
