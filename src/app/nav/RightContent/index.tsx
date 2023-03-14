@@ -16,7 +16,7 @@ interface Props {
 const RightContent = ({ user }: Props) => {
   const setAuthModalState = useSetAtom(authModalAtom)
   return (
-        <Box>
+        <>
             <AuthModal />
             <HStack>{user ? <Icons /> : <AuthButtons />}
             {user ?
@@ -41,11 +41,10 @@ const RightContent = ({ user }: Props) => {
                       </Menu>
                   </Center>
               )
-              
-          }
+           }
             </HStack>
 
-        </Box>
+        </>
     )
 }
 

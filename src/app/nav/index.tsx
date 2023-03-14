@@ -20,8 +20,8 @@ const Navbar = () => {
   const [user] = useAuthState(auth)
   return (
         <>
-            <HStack px={2} bg="white" py={2} h={12} justifyContent={{ lg: 'space-between' }}>
-                <HStack spacing={0}>
+            <HStack px={2} bg="white" py={2} h={12} justifyContent={{ md: 'space-between'}}>
+                <HStack>
                     <Image
                         src="/images/logo.svg"
                         w={7}
@@ -40,26 +40,24 @@ const Navbar = () => {
                         }}
                     />
                     {user && (
-                        <Center>
+                        <Center mr={2}>
                             <Menu>
-                                <MenuButton>
-                                    <Flex align="center">
+                                <MenuButton mr={2} ml={{base:0, lg: 2}}>
+                                    <Flex align="center" justify="space-between" width={{base: 'auto', lg: '150px'}}>
                                         <HStack>
                                             <Icon as={AiFillHome} fontSize={20} />
-                                            <Text fontWeight={500} mr={{ md: 8 }} display={{ base: 'none', lg: 'unset' }}>Home</Text>
+                                            <Text fontWeight={500} display={{ base: 'none', lg: 'flex' }}>Home</Text>
                                         </HStack>
-                                        <Icon as={ChevronDownIcon} ml="auto" />
+                                        <Icon as={ChevronDownIcon} fontSize={20}/>
                                     </Flex>
                                 </MenuButton>
                             </Menu>
                         </Center>
                     )}
-
                 </HStack>
+                <SearchInput user={user} />
 
-                <Flex flexGrow={{ sm: '1', lg: 'unset' }}>
-                    <SearchInput user={user} />
-                </Flex>
+
                 <RightContent user={user} />
                 {/* <AuthButtons /> */}
             </HStack>

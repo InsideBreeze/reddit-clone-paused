@@ -1,4 +1,4 @@
-import { HStack, Icon, VStack, Text, Flex, Box } from '@chakra-ui/react'
+import { HStack, Icon, VStack, Text, Flex, Box, Center } from '@chakra-ui/react'
 import { FaRedditSquare } from 'react-icons/fa'
 import { IoSparkles } from 'react-icons/io5'
 import {
@@ -18,17 +18,19 @@ const UserMenu = () => {
     return (
         /* https://github.com/chakra-ui/chakra-ui/issues/3173 */
       // place the menu to the box
-        <Box>
+        <HStack>
             <Menu>
                 <MenuButton>
                     <Flex align="center">
-                        <Icon as={FaRedditSquare} fontSize={{ sm: 22 }} color="gray.200" mr={1} />
+                      <Center>
+                        <Icon as={FaRedditSquare} fontSize={{ base: 24, lg: 30 }} color="gray.200" mr={1} />
+                      </Center>
                         <Flex
                             direction="column"
                             align="flex-start"
                             fontSize="8pt"
                             mr={8}
-                            display={{ base: 'none', md: 'flex' }}
+                            display={{ base: 'none', lg: 'flex' }}
                     >
                         <Text fontWeight={700}>ovozlj</Text>
                         {/* I don't know why I need set width here */}
@@ -56,7 +58,7 @@ const UserMenu = () => {
                 </MenuItem>
             </MenuList>
         </Menu>
-      </Box>
+      </HStack>
 
         )
 

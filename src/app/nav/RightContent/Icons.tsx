@@ -37,7 +37,7 @@ const Icons = () => {
                 </Center>
             </HStack>
 
-            <HStack spacing={2.5}>
+          <HStack justifyContent='space-betwee' spacing={2.5}>
                 <Center
                     p={1}
                     _hover={{ bg: 'gray.200', borderRadius: 'md', bgOpacity: '10%' }}
