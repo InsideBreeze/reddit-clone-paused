@@ -22,7 +22,7 @@ const UserMenu = ({ user }: Props) => {
     /* https://github.com/chakra-ui/chakra-ui/issues/3173 */
     // place the menu to the box
     <HStack>
-      <Box>
+      <Center>
         <Menu>
           <MenuButton>
             <Flex align="center">
@@ -67,7 +67,7 @@ const UserMenu = ({ user }: Props) => {
             </MenuItem>
           </MenuList>
         </Menu>
-      </Box>
+      </Center>
     </HStack>
   )
 }

@@ -18,13 +18,7 @@ import {
 import { BsEyeFill, BsFillPersonFill } from 'react-icons/bs'
 import { HiLockClosed } from 'react-icons/hi'
 import { useState } from 'react'
-import {
-  addDoc,
-  doc,
-  runTransaction,
-  serverTimestamp,
-  setDoc
-} from 'firebase/firestore'
+import { doc, runTransaction, serverTimestamp } from 'firebase/firestore'
 import { auth, db } from '@/firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
 interface Props {
@@ -62,10 +56,10 @@ const CreateCommunityModal = ({ open, onClose }: Props) => {
     // create Community
     // a community data contains numbersOfMember and communityName
     try {
-        // check the name only contains alphatic letters
-        if (!/^[a-zA-Z]+_?[a-zA-Z]+$/.test(communityName)) {
-            throw new Error('community name can only contain letters and _')
-        }
+      // check the name only contains alphatic letters
+      if (!/^[a-zA-Z]+_?[a-zA-Z]+$/.test(communityName)) {
+        throw new Error('community name can only contain letters and _')
+      }
 
       setLoading(true)
       const docRef = doc(db, 'communities', communityName)
@@ -86,11 +80,15 @@ const CreateCommunityModal = ({ open, onClose }: Props) => {
         })
 
         // the creator join this community auto
-          transation.set(doc(db, `users/${user?.uid}/communitySnippets`, communityName), {
+        transation.set(
+          doc(db, `users/${user?.uid}/communitySnippets`, communityName),
+          {
             communityId: communityName,
             isModerator: true
-        })
+          }
+        )
       })
+      setCommunityName('')
     } catch (err: any) {
       // Do something
       setError(err.message)

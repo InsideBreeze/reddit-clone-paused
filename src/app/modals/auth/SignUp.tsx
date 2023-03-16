@@ -45,7 +45,10 @@ const SignUp = () => {
         displayName: fieldValues.email.split('@')[0]
       })
       // there is a users collection to store info of each user
-      await setDoc(doc(db, 'users', userCred.user.uid), JSON.parse(JSON.stringify(userCred.user)))
+      await setDoc(
+        doc(db, 'users', userCred.user.uid),
+        JSON.parse(JSON.stringify(userCred.user))
+      )
       setAuthModalState(prev => ({ ...prev, open: false }))
     }
   }
