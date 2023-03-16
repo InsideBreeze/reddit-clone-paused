@@ -29,6 +29,8 @@ const Login = () => {
     await signInWithEmailAndPassword(fieldValues.email, fieldValues.password)
   }
 
+  console.log('logged user', user?.user)
+
   return (
     <form onSubmit={onLogin}>
       <VStack w="280px">

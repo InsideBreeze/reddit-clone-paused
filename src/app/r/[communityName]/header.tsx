@@ -1,10 +1,17 @@
 'use client'
 import { Community } from '@/atoms/communitiesAtom'
+import { auth } from '@/firebase';
+import useCommunityData from '@/hooks/useCommunityData';
 import { Box, Center, HStack, Image, Icon, Text, Button } from '@chakra-ui/react'
-import { notFound } from 'next/navigation';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { FaReddit } from 'react-icons/fa';
 
 const Header = ({ communityData }: { communityData: Community }) => {
+
+  const {communityState, loading} = useCommunityData()
+
+  const isJoined = !!communityState.mySnippets.find(snippet => snippet.communityId === communityData.id)
+
 
   return (
     <Box h="146px">
@@ -25,13 +32,12 @@ const Header = ({ communityData }: { communityData: Community }) => {
                 <Text fontWeight={800} fontSize='xl'>{communityData.id}</Text>
                 <Text color='gray.400' fontWeight={600}>r/{communityData.id}</Text>
               </Box>
-              <Button h='30px' px={6}>Join</Button>
+              <Button h='30px' px={6}>{isJoined ? 'joined' : 'join' }</Button>
               </HStack>
         </>
             )
           }
         </HStack>
-
       </Center>
     </Box>
   )

@@ -1,4 +1,5 @@
 import { Timestamp } from 'firebase/firestore'
+import { atom } from 'jotai'
 
 export interface Community {
   id: string
@@ -8,3 +9,15 @@ export interface Community {
   createdAt?: Timestamp
   imageURL?: string
 }
+
+export interface Snippet {
+    communityId: string,
+    isModerator?: boolean
+}
+interface CommunityState {
+    mySnippets: Snippet[]
+}
+
+export const communityStateAtom = atom<CommunityState>({
+    mySnippets: []
+})
