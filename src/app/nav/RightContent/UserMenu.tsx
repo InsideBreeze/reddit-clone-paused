@@ -18,7 +18,6 @@ interface Props {
     user?: User | null
 }
 const UserMenu = ({ user }: Props) => {
-    console.log(user)
     return (
         /* https://github.com/chakra-ui/chakra-ui/issues/3173 */
         // place the menu to the box
@@ -56,7 +55,7 @@ const UserMenu = ({ user }: Props) => {
                         </MenuItem>
                         <MenuDivider />
                         <MenuItem>
-                            <HStack onClick={async () => { await signOut(auth) }}>
+                            <HStack onClick={() => auth.signOut()}>
                                 <Icon as={FiLogOut} fontSize={22} />
                                 <Text fontWeight={600}>Logout</Text>
                             </HStack>
