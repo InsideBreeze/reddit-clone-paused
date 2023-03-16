@@ -4,22 +4,25 @@ import { Button, Input, VStack, Text } from '@chakra-ui/react'
 import { updateProfile } from 'firebase/auth'
 import { useSetAtom } from 'jotai'
 import { useState } from 'react'
-import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth'
+import {
+  useCreateUserWithEmailAndPassword,
+  useUpdateProfile
+} from 'react-firebase-hooks/auth'
 const SignUp = () => {
   const setAuthModalState = useSetAtom(authModalAtom)
   const [fieldValues, setFieldValues] = useState({
-      email: '',
-      password: '',
-      passwordConfirm: ''
+    email: '',
+    password: '',
+    passwordConfirm: ''
   })
-    const [error, setError] = useState('')
+  const [error, setError] = useState('')
 
-    const [createUserWithEmailAndPassword, user, loading, signUpError] =
-        useCreateUserWithEmailAndPassword(auth)
+  const [createUserWithEmailAndPassword, user, loading, signUpError] =
+    useCreateUserWithEmailAndPassword(auth)
 
-    const [updateProfile] = useUpdateProfile(auth);
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFieldValues({
+  const [updateProfile] = useUpdateProfile(auth)
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFieldValues({
       ...fieldValues,
       [e.target.name]: e.target.value
     })

@@ -17,11 +17,11 @@ const AuthModal = () => {
   const [authModalState, setAuthModalState] = useAtom(authModalAtom)
   const [user] = useAuthState(auth)
 
-    useEffect(() => {
-      if (user) {
-        setAuthModalState(prev => ({...prev, open: false}))
-      }
-    }, [user]);
+  useEffect(() => {
+    if (user) {
+      setAuthModalState(prev => ({ ...prev, open: false }))
+    }
+  }, [user])
 
   return (
     <>
