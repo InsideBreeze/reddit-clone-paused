@@ -58,14 +58,14 @@ const CreateCommunityModal = ({ open, onClose }: Props) => {
     if (error) {
       setError('')
     }
-    // check the name only contains alphatic letters
 
     // create Community
     // a community data contains numbersOfMember and communityName
     try {
-      if (!/^[a-zA-Z]+_?[a-zA-Z]+$/.test(communityName)) {
-        throw new Error('community name can only contain letters and _')
-      }
+        // check the name only contains alphatic letters
+        if (!/^[a-zA-Z]+_?[a-zA-Z]+$/.test(communityName)) {
+            throw new Error('community name can only contain letters and _')
+        }
 
       setLoading(true)
       const docRef = doc(db, 'communities', communityName)
@@ -83,6 +83,12 @@ const CreateCommunityModal = ({ open, onClose }: Props) => {
           createdAt: serverTimestamp(),
           privacyType,
           numberOfNumbers: 1
+        })
+
+        // the creator join this community auto
+          transation.set(doc(db, `users/${user?.uid}/communitySnippets`, communityName), {
+            communityId: communityName,
+            isModerator: true
         })
       })
     } catch (err: any) {

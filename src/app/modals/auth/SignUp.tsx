@@ -1,7 +1,7 @@
 import { authModalAtom } from '@/atoms/authModalAtom'
-import { auth } from '@/firebase'
+import { auth, db } from '@/firebase'
 import { Button, Input, VStack, Text } from '@chakra-ui/react'
-import { updateProfile } from 'firebase/auth'
+import { collection, doc, setDoc } from 'firebase/firestore'
 import { useSetAtom } from 'jotai'
 import { useState } from 'react'
 import {
@@ -36,14 +36,16 @@ const SignUp = () => {
       return
     }
 
-    const user = await createUserWithEmailAndPassword(
+    const userCred = await createUserWithEmailAndPassword(
       fieldValues.email,
       fieldValues.password
     )
-    if (user) {
+    if (userCred) {
       await updateProfile({
         displayName: fieldValues.email.split('@')[0]
       })
+      // there is a users collection to store info of each user
+      await setDoc(doc(db, 'users', userCred.user.uid), JSON.parse(JSON.stringify(userCred.user)))
       setAuthModalState(prev => ({ ...prev, open: false }))
     }
   }
