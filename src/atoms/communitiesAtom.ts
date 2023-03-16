@@ -11,13 +11,13 @@ export interface Community {
 }
 
 export interface Snippet {
-    communityId: string,
-    isModerator?: boolean
+  communityId: string
+  isModerator?: boolean
 }
 interface CommunityState {
-    mySnippets: Snippet[]
+  mySnippets: Snippet[]
 }
 
 export const communityStateAtom = atom<CommunityState>({
-    mySnippets: []
+  mySnippets: []
 })

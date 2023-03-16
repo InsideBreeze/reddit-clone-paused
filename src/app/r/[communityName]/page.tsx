@@ -12,19 +12,23 @@ const CommunityPage = async ({
   // because components in the app are all server rendering, so I think fetch remote data can directly in there
   console.log('parmas', params)
 
-    const communityDoc  = await getDoc(doc(db, `communities/${params.communityName}`))
-    const communityDocData = communityDoc.data()
+  const communityDoc = await getDoc(
+    doc(db, `communities/${params.communityName}`)
+  )
+  const communityDocData = communityDoc.data()
 
-    if (!communityDoc.exists()) {
-        notFound()
-    }
-    const communityData = JSON.parse(JSON.stringify({
-        id: communityDoc.id,
-        ...communityDocData,
-        createdAt: communityDocData?.createdAt?.toJSON() as Timestamp
-    }))
+  if (!communityDoc.exists()) {
+    notFound()
+  }
+  const communityData = JSON.parse(
+    JSON.stringify({
+      id: communityDoc.id,
+      ...communityDocData,
+      createdAt: communityDocData?.createdAt?.toJSON() as Timestamp
+    })
+  )
 
-    return (
+  return (
     <>
       <Header communityData={communityData as Community} />
     </>
