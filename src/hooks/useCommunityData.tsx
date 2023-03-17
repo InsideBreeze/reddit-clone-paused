@@ -102,6 +102,7 @@ const useCommunityData = () => {
     setLoading(false)
   }
 
+  // fetch data then store in the state
   const getSnippets = async () => {
     setLoading(true)
 

@@ -10,7 +10,7 @@ const CommunityPage = async ({
   params: { communityName: string }
 }) => {
   // because components in the app are all server rendering, so I think fetch remote data can directly in there
-  console.log('parmas', params)
+  //
 
   const communityDoc = await getDoc(
     doc(db, `communities/${params.communityName}`)
